@@ -1,2 +1,15 @@
-# snake-game-js
-Classic Snake Game implemented in JavaScript
+# 贪吃蛇游戏 (Snake Game)
+
+## 功能特点
+- 使用原生JavaScript实现
+- 简单的游戏机制
+- 实时计分
+- 可重新开始
+
+## 操作说明
+- 方向键控制蛇的移动
+- 吃到食物增加长度和分数
+- 碰到墙壁或自身会重新开始
+
+## 快速开始
+克隆仓库后直接用浏览器打开 `index.html` 即可开始游戏。
