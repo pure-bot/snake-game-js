@@ -5,12 +5,17 @@
     <title>贪吃蛇游戏</title>
     <style>
         canvas { border: 2px solid black; }
+        .control-panel { margin-top: 10px; }
     </style>
 </head>
 <body>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <div>
         <p>分数: <span id="scoreDisplay">0</span></p>
+        <div class="control-panel">
+            <label for="speedSlider">游戏速度:</label>
+            <input type="range" id="speedSlider" min="50" max="300" value="100" step="50">
+        </div>
         <button id="restartBtn">重新开始</button>
     </div>
     <script src="snake.js"></script>

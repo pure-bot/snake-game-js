@@ -2,11 +2,12 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreDisplay = document.getElementById('scoreDisplay');
 const restartBtn = document.getElementById('restartBtn');
+const speedSlider = document.getElementById('speedSlider');
 
 const gridSize = 20;
 const tileCount = canvas.width / gridSize;
 
-let snake, food, score, dx, dy;
+let snake, food, score, dx, dy, gameLoop;
 
 function init() {
     snake = [
@@ -17,6 +18,17 @@ function init() {
     dx = gridSize;
     dy = 0;
     scoreDisplay.textContent = score;
+    
+    // 清除之前的游戏循环
+    if (gameLoop) {
+        clearInterval(gameLoop);
+    }
+    
+    // 根据滑块重新设置游戏循环
+    gameLoop = setInterval(() => {
+        updateGame();
+        drawGame();
+    }, speedSlider.value);
 }
 
 function getRandomFood() {
@@ -91,11 +103,10 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// 绑定速度滑块变化事件
+speedSlider.addEventListener('input', init);
+
 restartBtn.addEventListener('click', init);
 
-let gameLoop = setInterval(() => {
-    updateGame();
-    drawGame();
-}, 100);
-
+// 初始化游戏
 init();
