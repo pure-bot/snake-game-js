@@ -2,11 +2,13 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreDisplay = document.getElementById('scoreDisplay');
 const restartBtn = document.getElementById('restartBtn');
+const speedSlider = document.getElementById('speedSlider');
 
 const gridSize = 20;
 const tileCount = canvas.width / gridSize;
 
 let snake, food, score, dx, dy;
+let gameLoop;
 
 function init() {
     snake = [
@@ -17,6 +19,16 @@ function init() {
     dx = gridSize;
     dy = 0;
     scoreDisplay.textContent = score;
+    clearInterval(gameLoop);
+    startGameLoop();
+}
+
+function startGameLoop() {
+    const speed = parseInt(speedSlider.value);
+    gameLoop = setInterval(() => {
+        updateGame();
+        drawGame();
+    }, speed);
 }
 
 function getRandomFood() {
@@ -93,9 +105,11 @@ document.addEventListener('keydown', (e) => {
 
 restartBtn.addEventListener('click', init);
 
-let gameLoop = setInterval(() => {
-    updateGame();
-    drawGame();
-}, 100);
+speedSlider.addEventListener('input', () => {
+    clearInterval(gameLoop);
+    startGameLoop();
+});
+
+startGameLoop();
 
 init();
